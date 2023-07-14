@@ -145,6 +145,21 @@ function iniciarApp() {
         btnFavorito.classList.add('btn', 'btn-danger', 'col');
         btnFavorito.textContent = 'Guardar Favorito';
 
+        //localstorage 
+        btnFavorito.onclick = function(){
+            //evitando que se dupliquen los registro en el localstorage 
+            if(existeStorage(idMeal)){
+                 return //si existe el registro evita que se agregue el registro 
+            }
+
+            agregarFavorito({
+                id:idMeal,
+                titulo: strMeal,
+                img: strMealThumb
+            });
+        }
+
+
         const btnCerrarModal = document.createElement('BUTTON');
         btnCerrarModal.classList.add('btn', 'btn-secondary', 'col');
         btnCerrarModal.textContent = 'Cerrar';
@@ -159,6 +174,17 @@ function iniciarApp() {
         modal.show();
 
 
+    }
+
+    function agregarFavorito(receta){
+        const favoritos =JSON.parse( localStorage.getItem('favoritos')) ??[];
+        localStorage.setItem('favoritos', JSON.stringify([...favoritos, receta]));
+    }
+
+    //existe storage 
+    function existeStorage(id){
+        const favoritos =JSON.parse( localStorage.getItem('favoritos')) ??[];
+        localStorage.setItem('favoritos', JSON.stringify([...favoritos, receta]));
     }
 
     //sirve para limpiar los resultados
