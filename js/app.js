@@ -10,8 +10,6 @@ function iniciarApp() {
         obtenerfavoritos();
     }
 
-    
-    
     const modal = new bootstrap.Modal('#modal',{});
 
     function obtenerCategorias(){
